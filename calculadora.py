@@ -103,6 +103,79 @@ datos.grid(columnspan=10, ipadx=108, ipady=18)
 
 # -----------------|Botones|-----------------
 
+lista_botones = [
+    [
+        {"texto": "1", "command": lambda: tomar_digito(1)}, 
+        {"texto": "2", "command": lambda: tomar_digito(2)},
+        {"texto": "3", "command": lambda: tomar_digito(3)},
+        {"texto": "+", "command": lambda: tomar_digito("+")},  
+        {"texto": "←", "command": borrar_ultimo}
+    ],
+    [
+        {"texto": "4", "command": lambda: tomar_digito(4)}, 
+        {"texto": "5", "command": lambda: tomar_digito(5)},
+        {"texto": "6", "command": lambda: tomar_digito(6)}, 
+        {"texto": "-", "command": lambda: tomar_digito("-")},
+        {"texto": "x²", "command": lambda: operacion_especial("cuadrado")}
+    ],
+    [
+        {"texto": "7", "command": lambda: tomar_digito(7)}, 
+        {"texto": "8", "command": lambda: tomar_digito(8)},
+        {"texto": "9", "command": lambda: tomar_digito(9)}, 
+        {"texto": "*", "command": lambda: tomar_digito("*")},
+        {"texto": "√", "command": lambda: operacion_especial("raiz")}
+    ],
+    [
+        {"texto": "0", "command": lambda: tomar_digito(0)}, 
+        {"texto": ".", "command": lambda: tomar_digito(".")},
+        {"texto": "Limpiar", "command": limpiar_completo}, 
+        {"texto": "/", "command": lambda: tomar_digito("/")},
+        {"texto": "1/x", "command": lambda: operacion_especial("inverso")}
+    ],
+    [
+        {"texto": "(", "command": lambda: tomar_digito("(")}, 
+        {"texto": "=", "command": lambda: operacion_especial("igual"), "sticky": "ew"},
+        {"texto": ")", "command": lambda: tomar_digito(")")}, 
+        {"texto": "π", "command": lambda: tomar_digito(math.pi)}
+    ]
+]
+
+
+for i in range(len(lista_botones)):
+    columna_visual = 0
+    
+    for j in range(0, len(lista_botones[i])):
+        btn = Button(ventana, 
+                     text=lista_botones[i][j]["texto"], 
+                     font=fuente_botones,
+                     fg="black", bg="white",
+                     height=2, width=6,
+                     padx=f"{paddingX}", pady=f"{paddingY}",
+                     command=lista_botones[i][j]["command"]
+        )
+        ancho = 4 if lista_botones[i][j]["texto"] == "=" else 2
+        btn.grid(
+            columnspan= ancho, 
+            row=i+1, column=columna_visual, 
+            sticky= lista_botones[i][j].get("sticky", None)
+        )
+
+        columna_visual += ancho
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'''
 btn1 = Button(ventana, text="1", font=fuente_botones, fg="black", bg="white", height=2, width=6, padx=f"{paddingX}", pady=f"{paddingY}", command = lambda: tomar_digito(1))
 btn1.grid(columnspan=2, row=1, column=0)
 
@@ -176,6 +249,8 @@ btnParentesisDerecho.grid(columnspan=2, row=5, column=6)
 
 btnPi = Button(ventana, text="π", font=fuente_botones, fg="black", bg="white", height=2, width=6, padx=paddingX, pady=paddingY, command= lambda: tomar_digito(math.pi))
 btnPi.grid(columnspan=2, row=5, column=8)
+'''
+
 
 # -> Abrimos la ventana, debe ir al final de todo, 
 # -> Una vez que ya esta configurado todo lo que tendra la misma
