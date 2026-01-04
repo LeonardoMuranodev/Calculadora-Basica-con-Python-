@@ -1,10 +1,10 @@
 # 🧮 Calculadora Python - Clean Code & UX
 
-![Python](https://img.shields.io/badge/Python-3.14-blue?style=for-the-badge&logo=python)
+![Python](https://img.shields.io/badge/Python-3.12%2B-blue?style=for-the-badge&logo=python)
 ![Tkinter](https://img.shields.io/badge/GUI-Tkinter-green?style=for-the-badge)
-![Status](https://img.shields.io/badge/Estado-Funcional-success?style=for-the-badge)
+![Status](https://img.shields.io/badge/Estado-Terminado-success?style=for-the-badge)
 
-> Una calculadora de escritorio robusta, construida no solo para calcular, sino para demostrar buenas prácticas de programación, separación de responsabilidades y manejo de errores.
+> Una calculadora de escritorio robusta, diseñada aplicando **Programación Orientada a Objetos (POO)**, principios DRY y una arquitectura escalable.
 
 ---
 
@@ -15,8 +15,9 @@
 
 ## 🚀 Características
 
-Este proyecto va más allá de una calculadora básica, implementando lógica de **Backend** separada del **Frontend**:
+Este proyecto trasciende el script básico, implementando una arquitectura de software limpia:
 
+* **Arquitectura POO:** Código encapsulado en clases para mejor mantenimiento y escalabilidad.
 * **Operaciones Básicas:** Suma, Resta, Multiplicación, División.
 * **Funciones Científicas:**
     * Raíz Cuadrada (`√`).
@@ -24,24 +25,20 @@ Este proyecto va más allá de una calculadora básica, implementando lógica de
     * Inverso Multiplicativo (`1/x`).
     * Constante PI (`π`).
 * **Manejo de Errores Robusto:**
-    * Detecta y avisa si intentas dividir por cero (`ZeroDivisionError`).
-    * Captura errores de sintaxis matemática (`SyntaxError`).
-    * Valida raíces negativas.
-* **Experiencia de Usuario (UX):**
-    * Función de borrado inteligente (carácter por carácter).
-    * Interfaz limpia usando `Tkinter`.
+    * Sistema centralizado `try/except` para atrapar `ZeroDivisionError`, `SyntaxError` y `ValueError`.
+* **Interfaz Dinámica:**
+    * Generación de botones mediante bucles y estructuras de datos (Listas/Diccionarios).
+    * Algoritmo de "cursor visual" para manejar botones de diferentes tamaños (Grid System).
 
 ## 🛠️ Tecnologías y Conceptos Aplicados
 
-* **Lenguaje:** Python 3.14
-* **Librería Gráfica:** Tkinter (Nativa).
-* **Lógica Matemática:** Módulo `math` y función `eval()` controlada.
-* **Principio DRY (Don't Repeat Yourself):** Centralización de la lógica de operaciones especiales en una única función manejadora para evitar redundancia de código.
-* **Patrón de Diseño:** Separación básica entre la lógica de negocio (funciones de cálculo) y la capa de presentación (configuración de la ventana y widgets).
+* **Lenguaje:** Python 3.12+
+* **GUI:** Tkinter (Librería nativa).
+* **Paradigma:** Programación Orientada a Objetos (Clases, Métodos, Atributos privados).
+* **Algoritmos:** Lógica de renderizado de UI basada en matrices.
+* **Refactorización:** Evolución de código procedural a código modular.
 
 ## 🔧 Instalación y Uso
-
-Este proyecto no requiere librerías externas (como pandas o numpy), por lo que es muy ligero y fácil de ejecutar.
 
 1.  **Clonar el repositorio:**
     ```bash
@@ -57,18 +54,17 @@ Este proyecto no requiere librerías externas (como pandas o numpy), por lo que 
     ```bash
     python calculadora.py
     ```
-    *(Asegúrate de que tu archivo principal tenga ese nombre o cámbialo en el comando)*
 
-## 🧠 Lógica del Código
+## 🧠 Lógica Destacada: Generación de UI
 
-El núcleo del proyecto se basa en una función centralizada para el manejo de excepciones:
+En lugar de declarar 20 botones manualmente, se implementó un motor de renderizado que lee una configuración:
 
 ```python
-# Ejemplo simplificado de la lógica interna
-def operacion_especial(tipo):
-    try:
-        # Cálculo seguro
-    except ZeroDivisionError:
-        # Feedback al usuario
-    except SyntaxError:
-        # Feedback al usuario
+# Ejemplo de la lógica del "Cursor Visual" para el Grid
+for i in range(len(lista_botones)):
+    columna_visual = 0 # Cursor
+    for j in range(len(lista_botones[i])):
+        # ... lógica de creación del botón ...
+        
+        # El cursor avanza según el ancho del botón (ej: '=' avanza 4 espacios)
+        columna_visual += ancho
