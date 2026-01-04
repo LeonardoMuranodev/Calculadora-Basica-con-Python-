@@ -35,7 +35,30 @@ class Calculadora:
         self._ventana.title("Calculadora Básica") 
         self._ventana.geometry("358x355") 
         self._ventana.resizable(False, False)
+        # Para escuchar el teclado
+        self._ventana.bind("<Key>", self._evento_teclado)
     
+    def _evento_teclado(self, event):
+        acciones_especiales = {
+           "Return": lambda: self._operacion_especial("igual"),
+           "BackSpace": lambda: self._borrar_ultimo(),
+           "Escape": lambda: self._limpiar_completo(),
+           "p": lambda: self._tomar_digito(math.pi),
+           "i": lambda: self._operacion_especial("inverso"),
+           "c": lambda: self._operacion_especial("cuadrado"),
+           "r": lambda: self._operacion_especial("raiz"),
+        }
+
+        accion = acciones_especiales.get(event.keysym)
+        if accion:
+            accion()
+        else :
+            permitidos = "0123456789.+-*/()"
+            if event.char in permitidos and event.char != "":
+                self._tomar_digito(event.char)
+        
+        # TODO Cuando hagamos el historial, mostrar un breve msj de q esa tecla no esta permitida
+
     def _configurar_input_datos(self):
         #Configura el display de entrada de datos.
         self._datos = Entry(
